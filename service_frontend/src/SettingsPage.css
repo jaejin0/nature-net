@@ -1,0 +1,47 @@
+.settings-title {
+    font-weight: 500;
+    font-size: 200%
+}
+
+.settings-container {
+    width: 600px;
+    min-height: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.confirm-button {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 20px 253px;
+    border-radius: 20px;
+    font-size: 130%;
+    cursor: pointer;
+}
+
+.AccountDelete-button {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    padding: 17px 210px;
+    border-radius: 20px;
+    font-size: 110%;
+    font-weight: 500;
+    background-color: RGB(255, 130, 140);
+    cursor: pointer;
+}
