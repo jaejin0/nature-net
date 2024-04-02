@@ -8,3 +8,14 @@ export const updateAnimalThreatLevel = async (animalId, newThreatLevel) => {
     });
     return updatedAnimal;
   };
+
+export const getAnimalId = async (userId, animalName) => {
+  const animal = await prisma.animal.findMany({
+    where : {
+      name:animalName,
+      userId:userId
+    }
+  });
+  
+  return animal[0]?.id;
+};

@@ -6,8 +6,9 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   const image = req.files.image;
   const id = Date.now();
-
+  console.log(image)
   const type = image.mimetype.split("/")[1];
+  console.log(type)
 
   const { data } = await supabase.storage
     .from("images")
