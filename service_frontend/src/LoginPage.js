@@ -79,7 +79,7 @@ function LoginPage() {
                     Login
                 </button>
                 <p className="sign-up-text">
-                    Don't have an account? <span onClick={handleSignUp} className="signup-link">Sign up</span>
+                    Don't have an account? <span onClick={login} className="signup-link">Sign up</span>
                 </p>
             </form>
         </div>
