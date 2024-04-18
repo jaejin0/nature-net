@@ -1,5 +1,5 @@
 .animal-box {
-    width: 300px;
+    width: 70%;
     background-color: white;
     border: 1px solid #ddd;
     padding: 10px;
@@ -12,49 +12,33 @@
     width: 50%;
     height: 50%;
     object-fit: cover;
-    /* Ensures the image covers the area without distorting */
     border-radius: 8px;
     border: 2px solid black;
-    /* Adds a black border */
 }
 
 .animal-info {
     margin-top: 8px;
 }
 
-/* Styles for the dropdown within the animal-info section */
 .animal-info select {
     padding: 8px 12px;
     border: 2px solid #ddd;
-    /* Light gray border that matches the box theme */
     border-radius: 4px;
-    /* Rounded corners */
     background-color: #f8f8f8;
-    /* Light background color */
     font-size: 1rem;
-    /* Adjust size as needed */
     color: #333;
-    /* Dark text color for readability */
     cursor: pointer;
-    /* Indicates this is an interactive element */
     outline: none;
-    /* Removes the default focus outline */
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-    /* Subtle inset shadow for depth */
     transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    /* Smooth transitions for interactions */
 }
 
 .animal-info select:hover {
     border-color: #bbb;
-    /* Changes border color on hover */
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
-    /* Darker shadow for a pressed effect */
 }
 
 .animal-info select:focus {
     border-color: #4CAF50;
-    /* Highlight color when focused */
     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.4);
-    /* Glow effect using the same color */
 }
