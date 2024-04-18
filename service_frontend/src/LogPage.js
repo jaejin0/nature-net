@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./LogPage.css";
 import SettingsIcon from "./settings.png";
-import LivestreamIcon from "./livestream.png";
 import HomeIcon from "./home.png";
 import Logo from "./logo.png";
 import threatIcon from './threat.png'

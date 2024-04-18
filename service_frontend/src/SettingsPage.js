@@ -7,7 +7,6 @@ import HomeIcon from './home.png';
 import Logo from './logo.png';
 import { useUser } from './UserContext';
 import { googleLogout } from '@react-oauth/google';
-import LivestreamIcon from './livestream.png';
 
 
 function Settings() {

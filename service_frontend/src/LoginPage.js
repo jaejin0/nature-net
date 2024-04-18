@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'; // Import useState and useEffect
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
-import lockIcon from './lock.png';
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios'; // Import axios to make HTTP requests
 import { useUser } from './UserContext'; // Import useUser
@@ -66,9 +65,7 @@ function LoginPage() {
 
 
 
-    const handleSignUp = () => {
-        navigate('/signup');
-    };
+
 
     return (
         <div className="login-container">
