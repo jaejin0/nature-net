@@ -1,5 +1,5 @@
 import express from "express";
-import { getAnimalId, updateAnimalThreatLevel } from "../model/animal.js";
+import { getAnimalId, getThreatLevel, updateAnimalThreatLevel } from "../model/animal.js";
 
 const router = express.Router();
 
@@ -36,3 +36,15 @@ router.post("/animalId", async (req, res) => {
 });
 
 export default router;
+
+router.get("/animalId",async(req,res)=>{
+  const {animalId}=req.body;
+
+  if(!animalId){
+    return res.status(400).send("Animal ID does not exist")
+  }
+
+  const threatLevel=await getThreatLevel(animalId);
+
+  res.status(200).send(threatLevel)
+})

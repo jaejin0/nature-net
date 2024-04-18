@@ -19,3 +19,14 @@ export const getAnimalId = async (userId, animalName) => {
 
   return animal[0]?.id;
 };
+
+
+export const getThreatLevel = async (animalId)=>{
+  const animal = await prisma.animal.findUnique ({
+    where:{
+      id:animalId,
+    }
+  });
+  let threatLevel= animal.threatLevel;
+  return threatLevel;
+}
