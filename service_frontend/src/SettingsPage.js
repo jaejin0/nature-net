@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SettingsPage.css';
 import SettingsIcon from './settings.png';
-import LivestreamIcon from './livestream.png';
+import threatIcon from './threat.png'
 import HomeIcon from './home.png';
 import Logo from './logo.png';
 import { useUser } from './UserContext';
 import { googleLogout } from '@react-oauth/google';
+import LivestreamIcon from './livestream.png';
+
 
 function Settings() {
     const { profile, setProfile } = useUser();
@@ -45,7 +47,7 @@ function Settings() {
             <div className="title-container"><h2 className="log-title">NatureNet</h2></div>
             <div className="icons-container">
                 <img src={SettingsIcon} alt="Settings" className="nav-icon" />
-                <img src={LivestreamIcon} alt="Livestream" className="nav-icon" onClick={() => navigate('/livestream')} />
+                <img src={threatIcon} alt="Livestream" className="nav-icon" onClick={() => navigate('/livestream')} />
                 <img src={HomeIcon} alt="Home" className='nav-icon' onClick={() => navigate('/logs')} />
             </div>
             <div className="settings-container">

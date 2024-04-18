@@ -6,6 +6,7 @@ import SettingsIcon from "./settings.png";
 import LivestreamIcon from "./livestream.png";
 import HomeIcon from "./home.png";
 import Logo from "./logo.png";
+import threatIcon from './threat.png'
 
 function LogPage() {
   const navigate = useNavigate();
@@ -73,7 +74,7 @@ function LogPage() {
         </div>
         <div className="icons-container">
           <img src={SettingsIcon} alt="Settings" className="nav-icon" onClick={handleSettings} />
-          <img src={LivestreamIcon} alt="Livestream" className="nav-icon" onClick={handleLivestream} />
+          <img src={threatIcon} alt="Livestream" className="nav-icon" onClick={handleLivestream} />
           <img src={HomeIcon} alt="Home" className="nav-icon" />
         </div>
       </div>
