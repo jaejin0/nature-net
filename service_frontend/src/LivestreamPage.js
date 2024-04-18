@@ -140,6 +140,8 @@ function LivestreamPage() {
         console.log("Current Threat Levels:", threatLevels);  // Logs existing threat levels
         console.log("Combined Animal Details:", animalDetails);  // Logs the new dictionary with combined details
         console.log(userId);  // Logs the user ID
+        navigate('/logs');
+
     };
 
 
