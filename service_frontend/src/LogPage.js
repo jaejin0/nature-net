@@ -19,36 +19,39 @@ function LogPage() {
       setError("");
 
       try {
-        // Retrieve user email from local storage
         const userEmail = localStorage.getItem("userEmail");
-
-        console.log(localStorage.getItem("userEmail"));
-
-        // Check if userEmail exists
         if (!userEmail) {
           throw new Error("User email not found.");
         }
 
-        // Fetch the user ID from the email using a GET request with query parameters
         const userIdResponse = await axios.get(
           `http://localhost:3000/user/userIdFromEmail?email=${userEmail}`
         );
 
-        // Check if userIdResponse has data and an id
         if (userIdResponse.data && userIdResponse.data.id) {
           const userId = userIdResponse.data.id;
 
-          // Fetch logs with the obtained userId
           const logsResponse = await axios.get("http://localhost:3000/log", {
             headers: { "user-id": userId },
           });
-          setLogs(logsResponse.data);
+          const logsData = logsResponse.data;
+
+          // Fetch threat levels for each log with animal ID
+          const logsDataWithThreat = await Promise.all(logsData.map(async (log) => {
+            const threatResponse = await axios.get("http://localhost:3000/animal/animalId", {
+              params: { animalId: log.animalId },
+            });
+            log.threatLevel = threatResponse.data;
+            return log;
+          }));
+
+          setLogs(logsDataWithThreat);
         } else {
-          throw new Error("User ID not found for the given email."); 
+          throw new Error("User ID not found for the given email.");
         }
       } catch (error) {
-        console.error("Error fetching user ID or logs:", error);
-        setError("Failed to fetch user ID or logs.");
+        console.error("Error fetching user ID, logs or threat levels:", error);
+        setError("Failed to fetch user ID, logs or threat levels.");
       }
 
       setIsLoading(false);
@@ -56,6 +59,7 @@ function LogPage() {
 
     fetchUserIdAndLogs();
   }, []);
+
   const handleSettings = () => navigate("/settings");
   const handleLivestream = () => navigate("/livestream");
 
@@ -68,18 +72,8 @@ function LogPage() {
           <h2 className="log-title">NatureNet</h2>
         </div>
         <div className="icons-container">
-          <img
-            src={SettingsIcon}
-            alt="Settings"
-            className="nav-icon"
-            onClick={handleSettings}
-          />
-          <img
-            src={LivestreamIcon}
-            alt="Livestream"
-            className="nav-icon"
-            onClick={handleLivestream}
-          />
+          <img src={SettingsIcon} alt="Settings" className="nav-icon" onClick={handleSettings} />
+          <img src={LivestreamIcon} alt="Livestream" className="nav-icon" onClick={handleLivestream} />
           <img src={HomeIcon} alt="Home" className="nav-icon" />
         </div>
       </div>
@@ -91,14 +85,14 @@ function LogPage() {
       ) : logs.length > 0 ? (
         <div className="logs-container">
           {logs.map((log) => (
-            <div key={log.id} className="log-item">
+            <div key={log.id} className={`log-item ${log.threatLevel.toLowerCase()}`}> {/* Dynamic class assignment */}
               <div className="log-info">
                 <div className="left-info">
                   <div>ID: {log.id}</div>
-                  {/* Adjust according to your log object structure */}
                   <div>Timestamp: {log.timestamp}</div>
                   <div>User ID: {log.userId}</div>
                   <div>Animal ID: {log.animalId}</div>
+                  <div>Threat Level: {log.threatLevel}</div>
                 </div>
                 <div className="right-info">
                   <img src={log.image} alt="Log" />

@@ -1,6 +1,6 @@
 import express from "express";
 
-import { createUser, getActiveUser, getUserByEmail, updateUserPhoneNumber, userStatusUpdate,getPhoneEmailById } from "../model/user.js";
+import { createUser, getActiveUser, getUserByEmail, updateUserPhoneNumber, userStatusUpdate, getPhoneEmailById } from "../model/user.js";
 
 const router = express.Router();
 
@@ -50,7 +50,6 @@ router.get('/userIdFromEmail', async (req, res) => {
 });
 
 
-
 router.post('/status', async (req, res) => {
   const data = req.body;
   console.log(data);
@@ -65,17 +64,17 @@ router.post('/status', async (req, res) => {
 });
 
 
-router.get('/phoneAndEmail',async(req,res)=>{
-  const data=req.body;
-  const {userId}=data;
-  
-  if (!userId){
+router.get('/phoneAndEmail', async (req, res) => {
+  const data = req.body;
+  const { userId } = data;
+
+  if (!userId) {
     return res.status(400).send("User Id not available");
   }
-  
-  let temp= await getPhoneEmailById(userId);
-  let email=temp[0];
-  let phoneNumber=temp[1]
+
+  let temp = await getPhoneEmailById(userId);
+  let email = temp[0];
+  let phoneNumber = temp[1]
   // console.log("stupid")
 
   res.status(200).json(temp)
@@ -83,12 +82,12 @@ router.get('/phoneAndEmail',async(req,res)=>{
 });
 
 
-router.get("/status",async(req,res)=>{
+router.get("/status", async (req, res) => {
   // const data = req.body;
   // console.log("HI")
-  let user=await getActiveUser();
+  let user = await getActiveUser();
   console.log(user)
-  if (!user){
+  if (!user) {
     return res.status(400).send("No Active Users Found")
   }
   res.status(200).json(user);
@@ -114,3 +113,4 @@ router.post("/", async (req, res) => {
 });
 
 export default router;
+

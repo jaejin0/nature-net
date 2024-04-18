@@ -31,7 +31,7 @@
     align-items: center;
     overflow-y: auto;
     /* Enable vertical scrolling */
-    max-height: 500px;
+    max-height: 1000px;
     /* Set a fixed maximum height */
     width: calc(100% - 120px);
     /* Adjust width to be less than 100% to allow space */
@@ -47,7 +47,7 @@
 .log-item {
     background-color: white;
     /* Set the background color to white */
-    border: 1px solid #ccc;
+    border: 5px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin: 10px;
@@ -58,6 +58,18 @@
     /* Use flexbox to align items */
     justify-content: space-between;
     /* Space out the child elements */
+}
+
+.log-item.low {
+    border-color: green;
+}
+
+.log-item.medium {
+    border-color: yellow;
+}
+
+.log-item.high {
+    border-color: red;
 }
 
 .log-item .log-info {
