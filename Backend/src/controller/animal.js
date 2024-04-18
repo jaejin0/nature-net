@@ -37,14 +37,19 @@ router.post("/animalId", async (req, res) => {
 
 export default router;
 
-router.get("/animalId",async(req,res)=>{
-  const {animalId}=req.body;
+router.get("/animalId", async (req, res) => {
+  const animalId = parseInt(req.query.animalId, 10);
 
-  if(!animalId){
-    return res.status(400).send("Animal ID does not exist")
+  // Check if animalId is a valid number after parsing
+  if (isNaN(animalId)) {
+    return res.status(400).send("Invalid animal ID provided");
   }
 
-  const threatLevel=await getThreatLevel(animalId);
-
-  res.status(200).send(threatLevel)
+  try {
+    const threatLevel = await getThreatLevel(animalId);
+    res.status(200).send(threatLevel);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
 })
