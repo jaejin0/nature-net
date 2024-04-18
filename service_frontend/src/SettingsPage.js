@@ -7,6 +7,7 @@ import HomeIcon from './home.png';
 import Logo from './logo.png';
 import { useUser } from './UserContext';
 import { googleLogout } from '@react-oauth/google';
+import axios from 'axios';
 
 
 function Settings() {
@@ -34,10 +35,44 @@ function Settings() {
 
     const handleConfirm = async (event) => {
         event.preventDefault();
-        // Additional logic for updating phone number or handling user settings
-        console.log('Settings confirmed.');
+        console.log("Settings confirmed going back to logs!");
+
+        const userEmail = localStorage.getItem("userEmail");
+        console.log(localStorage.getItem("userEmail"));
+
+        if (!userEmail) {
+            throw new Error("User email not found.");
+        }
+
+        const userIdResponse = await axios.get(`http://localhost:3000/user/userIdFromEmail?email=${userEmail}`);
+        const userId = userIdResponse.data.id;
+
+        if (phoneNumber && profile?.id) {
+            try {
+                const response = await fetch(`http://localhost:3000/user/${userId}/phone`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phoneNumber }),
+
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    console.log('Phone number updated:', data);
+                    alert('Phone number updated successfully!');
+                } else {
+                    throw new Error(data.message || "Failed to update phone number");
+                }
+            } catch (error) {
+                console.error('Error updating phone number:', error);
+                alert(error.message);
+            }
+        } else {
+            alert('User ID or phone number missing!');
+        }
         navigate('/logs');
     };
+
 
     return (
         <div className="title-settings">
