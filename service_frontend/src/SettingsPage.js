@@ -21,16 +21,12 @@ function Settings() {
         navigate('/');
     };
 
-    const formatPhoneNumber = (value) => {
-        const numbers = value.replace(/\D/g, ''); // Remove all non-digits
-        const char = { 0: '(', 3: ') ', 6: ' ' }; // Define desired formatting
-        const phoneNumber = numbers.split('').map((number, index) => (char[index] ? char[index] + number : number)).join('');
-        return phoneNumber.slice(0, 14); // Limit to 14 characters: (123) 456 7890
+    const handlePhoneNumberChange = (e) => {
+        setPhoneNumber(e.target.value);
     };
 
-    const handlePhoneNumberChange = (e) => {
-        const formattedPhoneNumber = formatPhoneNumber(e.target.value);
-        setPhoneNumber(formattedPhoneNumber);
+    const toPlainPhoneNumber = (formattedNumber) => {
+        return formattedNumber.replace(/\D/g, ''); // Remove all non-digits
     };
 
     const handleConfirm = async (event) => {
@@ -48,12 +44,12 @@ function Settings() {
         const userId = userIdResponse.data.id;
 
         if (phoneNumber && profile?.id) {
+            const plainPhoneNumber = toPlainPhoneNumber(phoneNumber);
             try {
                 const response = await fetch(`http://localhost:3000/user/${userId}/phone`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ phoneNumber }),
-
+                    body: JSON.stringify({ phoneNumber: plainPhoneNumber }),
                 });
 
                 const data = await response.json();
@@ -72,7 +68,6 @@ function Settings() {
         }
         navigate('/logs');
     };
-
 
     return (
         <div className="title-settings">
@@ -95,7 +90,7 @@ function Settings() {
                         <input
                             type="text"
                             id="phoneNumber"
-                            placeholder="(123) 456 7890"
+                            placeholder="1234567890"
                             value={phoneNumber}
                             onChange={handlePhoneNumberChange}
                             className="input-field"
