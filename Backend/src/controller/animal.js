@@ -1,5 +1,5 @@
 import express from "express";
-import { getAnimalId, getThreatLevel, updateAnimalThreatLevel } from "../model/animal.js";
+import { getAnimalId, getThreatLevel, updateAnimalThreatLevel, getAnimalName } from "../model/animal.js";
 
 const router = express.Router();
 
@@ -53,3 +53,25 @@ router.get("/animalId", async (req, res) => {
     res.status(500).send("Server error");
   }
 })
+
+router.get("/:animalId/name", async (req, res) => {
+  const { animalId } = req.params;
+  const id = parseInt(animalId, 10);
+
+  // Check if animalId is a valid number after parsing
+  if (isNaN(id)) {
+    return res.status(400).send("Invalid animal ID provided");
+  }
+
+  try {
+    const animalName = await getAnimalName(id);
+    if (animalName) {
+      res.status(200).send({ animalName });
+    } else {
+      res.status(404).send("Animal not found");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+});

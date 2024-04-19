@@ -21,12 +21,24 @@ export const getAnimalId = async (userId, animalName) => {
 };
 
 
-export const getThreatLevel = async (animalId)=>{
-  const animal = await prisma.animal.findUnique ({
-    where:{
-      id:animalId,
+export const getThreatLevel = async (animalId) => {
+  const animal = await prisma.animal.findUnique({
+    where: {
+      id: animalId,
     }
   });
-  let threatLevel= animal.threatLevel;
+  let threatLevel = animal.threatLevel;
   return threatLevel;
 }
+
+export const getAnimalName = async (animalId) => {
+  const animal = await prisma.animal.findUnique({
+    where: {
+      id: animalId,
+    },
+    select: {
+      name: true // Only fetch the name
+    }
+  });
+  return animal ? animal.name : null;
+};

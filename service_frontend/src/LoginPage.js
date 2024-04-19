@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'; // Import useState and useEffect
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
-import lockIcon from './lock.png';
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios'; // Import axios to make HTTP requests
 import { useUser } from './UserContext'; // Import useUser
+import logo from './logo.png'
 
 
 function LoginPage() {
@@ -42,7 +42,7 @@ function LoginPage() {
                     const statusData = {
                         userEmail: localStorage.getItem("userEmail")
                     };
-    
+
                     return axios.post('http://localhost:3000/user/status', statusData);
                 })
                 .then(() => {
@@ -65,26 +65,20 @@ function LoginPage() {
 
 
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Your login logic for username/password
-    };
 
-    const handleSignUp = () => {
-        navigate('/signup');
-    };
 
     return (
         <div className="login-container">
-            <h2 className="login-title">Login</h2>
-            <form onSubmit={handleSubmit} className="login-form">
+            <h2 className="login-title">Welcome</h2>
+            <img src={logo} alt="Logo" className="login-logo" />
+            <form className="login-form">
                 <button type="button" onClick={login} className="login-button">
-                    <img src={lockIcon} alt="Lock" className="icon-lock" />
-                    Log in with Google
+                    Login
                 </button>
-                <button type="button" onClick={handleSignUp} className="signup-button">Sign Up</button>
+                <p className="sign-up-text">
+                    Don't have an account? <span onClick={login} className="signup-link">Sign up</span>
+                </p>
             </form>
-
         </div>
     );
 }

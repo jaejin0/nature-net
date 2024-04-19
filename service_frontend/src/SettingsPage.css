@@ -35,6 +35,13 @@
     cursor: pointer;
 }
 
+.confirm-button:hover {
+    transform: scale(1);
+    /* Button grows by 10% */
+    background-color: #e2e3e5;
+    /* Slightly darker gray on hover for feedback */
+}
+
 .AccountDelete-button {
     margin-top: 20px;
     margin-bottom: 40px;
@@ -44,4 +51,25 @@
     font-weight: 500;
     background-color: RGB(255, 130, 140);
     cursor: pointer;
+}
+
+/* Logout button styles */
+.logout-button {
+    background-color: #f8f9fa;
+    /* Standard light gray */
+    color: black;
+    border: 1px solid #ccc;
+    /* Slightly darker border for definition */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    transform: scale(1.1);
+    /* Button grows by 10% */
+    background-color: #e2e3e5;
+    /* Slightly darker gray on hover for feedback */
 }

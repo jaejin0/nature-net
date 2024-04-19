@@ -11,6 +11,15 @@
     margin-left: auto;
     margin-right: auto;
     width: 60%;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    /* Smooth transition for background and shadow */
+}
+
+.log:hover {
+    background-color: #f9f9f9;
+    /* Lightens the background on hover */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    /* Adds shadow for 3D effect */
 }
 
 .logo {
@@ -31,9 +40,9 @@
     align-items: center;
     overflow-y: auto;
     /* Enable vertical scrolling */
-    max-height: 1000px;
+    max-height: 80vh;
     /* Set a fixed maximum height */
-    width: calc(100% - 120px);
+    width: calc(100% - 7vw);
     /* Adjust width to be less than 100% to allow space */
     margin: 0 60px;
     /* Adds 20px space on the left and right */
@@ -41,7 +50,8 @@
     /* Optional: Adds some vertical padding */
     background-color: rgba(242, 242, 242, 0.5);
     /* Light gray background with transparency */
-    /* Light gray background color */
+    border-radius: 10px;
+    /* Adds rounded corners */
 }
 
 .log-item {
@@ -83,12 +93,16 @@
 .log-item .log-info .left-info {
     padding-right: 20px;
     /* Maintain the space between left info and the image */
+    padding-left: 60px;
+    /* Adds padding from the left for more space */
     display: flex;
     /* Enable Flexbox */
     flex-direction: column;
     /* Stack children vertically */
     justify-content: center;
     /* Center content vertically */
+    gap: 10px;
+    /* Increases space between each item */
 }
 
 .log-item .log-info .right-info {
@@ -100,8 +114,10 @@
 .log-item img {
     width: auto;
     /* Adjust based on your image's aspect ratio */
-    height: 200px;
+    height: 20vh;
     /* Example height, adjust as needed */
+    border: 2px solid black;
+    /* Adds a black outline */
     /* Image is contained in right-info, which is positioned on the far right */
 }
 
