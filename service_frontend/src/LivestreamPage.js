@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import threatIcon from './threat.png'
 import { useNavigate } from 'react-router-dom';
 import './LivestreamPage.css';
 import SettingsIcon from './settings.png';
-import LivestreamIcon from './livestream.png';
 import HomeIcon from './home.png';
 import Logo from './logo.png';
 import Boar from './boar.png';
@@ -140,6 +139,8 @@ function LivestreamPage() {
         console.log("Current Threat Levels:", threatLevels);  // Logs existing threat levels
         console.log("Combined Animal Details:", animalDetails);  // Logs the new dictionary with combined details
         console.log(userId);  // Logs the user ID
+        navigate('/logs');
+
     };
 
 
@@ -148,10 +149,10 @@ function LivestreamPage() {
         <div className="title-settings">
             <img src={Logo} alt="Logo" className='logo'></img>
             <div className="title-space"></div>
-            <div className="title-container"><h2 className="log-title">Remote Livestream</h2></div>
+            <div className="title-container"><h2 className="log-title">Threat Level configurations</h2></div>
             <div className="icons-container">
                 <img src={SettingsIcon} alt="Settings" className="nav-icon" onClick={handleSettings} />
-                <img src={LivestreamIcon} alt="Livestream" className="nav-icon" />
+                <img src={threatIcon} alt="Livestream" className="nav-icon" />
                 <img src={HomeIcon} alt="Home" className='nav-icon' onClick={handleHome} />
             </div>
 

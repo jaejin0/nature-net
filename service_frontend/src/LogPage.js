@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./LogPage.css";
 import SettingsIcon from "./settings.png";
-import LivestreamIcon from "./livestream.png";
 import HomeIcon from "./home.png";
 import Logo from "./logo.png";
+import threatIcon from './threat.png'
+
 
 function LogPage() {
   const navigate = useNavigate();
@@ -45,7 +46,15 @@ function LogPage() {
             return log;
           }));
 
+          const logsWithAnimalNames = await Promise.all(logsData.map(async log => {
+            const response = await axios.get(`http://localhost:3000/animal/${log.animalId}/name`);
+            log.animalName = response.data.animalName; // Assuming animal name is returned correctly
+            return log;
+          }));
+
           setLogs(logsDataWithThreat);
+          setLogs(logsWithAnimalNames);
+
         } else {
           throw new Error("User ID not found for the given email.");
         }
@@ -73,7 +82,7 @@ function LogPage() {
         </div>
         <div className="icons-container">
           <img src={SettingsIcon} alt="Settings" className="nav-icon" onClick={handleSettings} />
-          <img src={LivestreamIcon} alt="Livestream" className="nav-icon" onClick={handleLivestream} />
+          <img src={threatIcon} alt="Livestream" className="nav-icon" onClick={handleLivestream} />
           <img src={HomeIcon} alt="Home" className="nav-icon" />
         </div>
       </div>
@@ -84,22 +93,33 @@ function LogPage() {
         <p>{error}</p>
       ) : logs.length > 0 ? (
         <div className="logs-container">
-          {logs.map((log) => (
-            <div key={log.id} className={`log-item ${log.threatLevel.toLowerCase()}`}> {/* Dynamic class assignment */}
-              <div className="log-info">
-                <div className="left-info">
-                  <div>ID: {log.id}</div>
-                  <div>Timestamp: {log.timestamp}</div>
-                  <div>User ID: {log.userId}</div>
-                  <div>Animal ID: {log.animalId}</div>
-                  <div>Threat Level: {log.threatLevel}</div>
-                </div>
-                <div className="right-info">
-                  <img src={log.image} alt="Log" />
+          {logs.map((log) => {
+            const timestamp = log.timestamp; // Example: "2024-04-18T17:05:16.185Z"
+            const date = new Date(timestamp);
+
+            const month = date.toLocaleString('default', { month: 'long' }); // Converts month number to month name
+            const day = date.getDate();
+            const year = date.getFullYear();
+            const time = timestamp.split('T')[1]; // Extracts time part after 'T'
+
+            return (
+              <div key={log.id} className={`log-item ${log.threatLevel.toLowerCase()}`}>
+                <div className="log-info">
+                  <div className="left-info">
+                    <div><span style={{ fontWeight: 'bold' }}>Month:</span> {month}</div>
+                    <div><span style={{ fontWeight: 'bold' }}>Day:</span> {day}</div>
+                    <div><span style={{ fontWeight: 'bold' }}>Year:</span> {year}</div>
+                    <div><span style={{ fontWeight: 'bold' }}>Time:</span> {time}</div>
+                    <div><span style={{ fontWeight: 'bold' }}>Animal Name:</span> {log.animalName}</div>
+                    <div><span style={{ fontWeight: 'bold' }}>Threat Level:</span> {log.threatLevel}</div>
+                  </div>
+                  <div className="right-info">
+                    <img src={log.image} alt="Log" />
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       ) : (
         <p>No logs found.</p>
