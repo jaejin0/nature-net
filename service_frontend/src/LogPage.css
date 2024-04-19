@@ -40,7 +40,7 @@
     align-items: center;
     overflow-y: auto;
     /* Enable vertical scrolling */
-    max-height: 100vh;
+    max-height: 80vh;
     /* Set a fixed maximum height */
     width: calc(100% - 7vw);
     /* Adjust width to be less than 100% to allow space */
