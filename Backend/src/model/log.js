@@ -25,6 +25,9 @@ export const getLogs = async (userId) => {
     where: {
       userId,
     },
+    orderBy: {
+      timestamp: 'desc',
+    },
   });
 
   return logs;
