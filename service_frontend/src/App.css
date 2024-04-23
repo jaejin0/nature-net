@@ -9,3 +9,7 @@ body {
   height: 100vh;
   margin: 0;
 }
+
+body {
+  font-family: 'Roboto', sans-serif;
+}

@@ -100,7 +100,8 @@ function LogPage() {
             const month = date.toLocaleString('default', { month: 'long' }); // Converts month number to month name
             const day = date.getDate();
             const year = date.getFullYear();
-            const time = timestamp.split('T')[1]; // Extracts time part after 'T'
+            // const time = timestamp.split('T')[1]; // Extracts time part after 'T'
+            const time = new Date(timestamp).toLocaleTimeString();
 
             return (
               <div key={log.id} className={`log-item ${log.threatLevel.toLowerCase()}`}>
