@@ -71,13 +71,13 @@ def process_response(response_text, coordinates, image_size, animal_name):
     email = user_status_data["email"] # emailaddress@gmail.com
 
     # message alert
-    if phone_number != "":
-        for key in CARRIERS:
-            carrier = CARRIERS[key]
-            send_alert(subject, body, phone_number + carrier)
+    # if phone_number != "":
+    #     for key in CARRIERS:
+    #         carrier = CARRIERS[key]
+    #         send_alert(subject, body, phone_number + carrier)
 
-    # email alert
-    send_alert(subject, body, email)
+    # # email alert
+    # send_alert(subject, body, email)
     
 
 def predict_with_yolo(image_path):

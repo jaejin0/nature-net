@@ -95,6 +95,21 @@
     /* Smooth transition for hover effects */
 }
 
+.run-button {
+    padding: 20px 20px;
+    /* Adjust padding as needed */
+    border-radius: 20px;
+    color: white;
+    background-image: linear-gradient(-20deg, #d558c8 0%, #24d292 100%);
+    /* Gradient from light blue to light green */
+    font-size: 130%;
+    cursor: pointer;
+    border: none;
+    /* Remove any border for a cleaner look */
+    transition: background-color 0.3s, box-shadow 0.3s;
+    /* Smooth transition for hover effects */
+}
+
 .login-button:hover {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
     /* Add subtle shadow on hover */
