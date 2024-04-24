@@ -6,6 +6,7 @@ import SettingsIcon from "./settings.png";
 import HomeIcon from "./home.png";
 import Logo from "./logo.png";
 import threatIcon from './threat.png'
+import './LoginPage.css';
 
 
 function LogPage() {
@@ -13,6 +14,7 @@ function LogPage() {
   const [logs, setLogs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [camRunning, setCamRunning] = useState(false)
 
   useEffect(() => {
     const fetchUserIdAndLogs = async () => {
@@ -69,6 +71,24 @@ function LogPage() {
     fetchUserIdAndLogs();
   }, []);
 
+  const runCamera = async () => {
+    try {
+      await axios.post("http://localhost:3000/cam/run-camera");
+      setCamRunning(!camRunning)
+    } catch (error) {
+      console.error("Error executing Python script:", error);
+    }
+  };
+
+  const stopCamera = async () => {
+    try {
+      await axios.post("http://localhost:3000/cam/stop-camera");
+      setCamRunning(!camRunning)
+    } catch (error) {
+      console.error("Error executing Python script:", error);
+    }
+  };
+
   const handleSettings = () => navigate("/settings");
   const handleLivestream = () => navigate("/livestream");
 
@@ -84,6 +104,10 @@ function LogPage() {
           <img src={SettingsIcon} alt="Settings" className="nav-icon" onClick={handleSettings} />
           <img src={threatIcon} alt="Livestream" className="nav-icon" onClick={handleLivestream} />
           <img src={HomeIcon} alt="Home" className="nav-icon" />
+          {!camRunning ? 
+          <button onClick={runCamera} className="run-button">Run Camera</button>:
+          <button onClick={stopCamera} className="run-button">Stop Camera</button>
+        }
         </div>
       </div>
 

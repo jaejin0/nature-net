@@ -5,6 +5,7 @@ import userRouter from "./controller/user.js";
 import logRouter from "./controller/log.js";
 import uploadRouter from "./controller/upload.js";
 import animalRouter from "./controller/animal.js";
+import camRouter from "./controller/cam.js"
 
 
 const app = express();
@@ -39,6 +40,7 @@ app.use("/animal", animalRouter);
 app.use("/upload", uploadRouter);
 app.use("/user", userRouter);
 app.use("/log", logRouter);
+app.use("/cam", camRouter)
 
 app.post("/", (req, res) => {
   console.log(req.files);
