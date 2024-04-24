@@ -168,6 +168,7 @@ input[type="text"] {
     /* Centering the title, assuming the .title-settings takes full width */
     text-align: center;
     font-size: 250%;
+    padding-left:150px
 }
 
 .nav-icon {

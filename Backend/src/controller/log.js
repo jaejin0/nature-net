@@ -1,5 +1,6 @@
 import express from "express";
 import { createLog, getLog, getLogs } from "../model/log.js";
+import { exec } from "child_process";
 
 const router = express.Router();
 
