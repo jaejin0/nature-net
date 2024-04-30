@@ -106,3 +106,7 @@ Place this model in the `detection_api` folder.
 
 First, in one terminal, cd into the `detection_api` folder and run the server by running `python app.py`. You may need to install some packages.
 Then, in another terminal, cd into the `detection_script` folder and run `python cam.py`. This will begin capturing frames and sending them through the model.
+
+To run the backend, in another console, cd into the `Backend` folder, and run `node src/index.js`.
+
+To run the frontend, in another console, cd into the `service_frontend` folder, and type `npm start`. This will ask if you want to run the frontend on another port. Type `Y`.
